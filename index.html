@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+    <h3>Buy your first bike in lodz</h3>
+    <select id="companies" onchange="initMap()">
+        <option value="" disabled selected style="display:none;">Label</option>
+        <option>KTM</option>
+        <option>Suzuki</option>
+        <option>Honda</option>
+        <option>Kawasaki</option>
+    </select>
+    <div id="map"></div>
+    <script> 
+      function initMap() {
+        var getvalue = document.getElementById("companies");
+        var company = getvalue.options[getvalue.selectedIndex].text;
+        switch (company){
+          case "Suzuki":
+            var coordinates = {lat: 51.714475, lng: 19.483609 };
+            var name= "Suzuki Grandys duo";
+            var address="93-320, Sarmacka 17, 93-320 Łódź";
+            break;
+          case "Honda":
+            var coordinates = {lat: 51.796472, lng: 19.515967};
+            var name="Honda Park Autoryzowany Dealer";
+            var address="Brzezińska 35, 92-103 Łódź"
+            break;
+          case "KTM":
+            var coordinates = {lat: 51.740174, lng: 19.419177};
+            var name="Profi autoryzowany dealer KTM";
+            var address="Obywatelska 191, 94-104 Łódź"
+            break;
+          case "Kawasaki": 
+            var coordinates = {lat: 51.762900, lng: 19.4291};
+            var name="MOTO-MOTO autoryzowany dealer KAWASAKI, KYMCO";
+            var address="Aleja Włókniarzy 217, 90-768 Łódź"
+            break;
+          default:
+            var coordinates = {lat: 51.740177, lng: 19.419134};
+            var name="";
+            var address=""
+        }
+        document.getElementById("p1").innerHTML = name;
+        document.getElementById("p2").innerHTML = address;
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 15,
+          center: coordinates
+        });
+        var marker = new google.maps.Marker({
+          position: coordinates,
+          map: map
+        });
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap">
+    </script>
+    <div>
+        <p id="p1">Company name!</p>
+        <p id="p2">Company address</p>
+    </div>
+  </body>
+</html>
